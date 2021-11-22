@@ -1,5 +1,15 @@
 .header {
   background-color: var(--primary);
   color: white;
-  padding: 1rem 2rem;
+  padding: 1rem;
+}
+
+.logoContainer {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.logo {
+  height: 30px;
 }
