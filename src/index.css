@@ -31,6 +31,7 @@ code {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-header);
+  margin-bottom: 1rem;
 }
 
 h1 {
@@ -41,6 +42,36 @@ h2 {
   font-size: clamp(1.3rem, 4vw, 3rem);
 }
 
+h3 {
+  font-size: clamp(1.3rem, 3vw, 2.5rem);
+}
+
+h4 {
+  font-size: clamp(1.2rem, 1.5vw, 1.4rem);
+}
+
 p {
   font-family: var(--font-body);
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.primary {
+  background-color: var(--primary);
+}
+
+.secondary-lt {
+  background-color: var(--secondary-lt);
+}
+
+.secondary-dk {
+  background-color: var(--secondary-dk);
+}
+
+.tertiary {
+  background-color: var(--tertiary);
+}
+
+.white {
+  background-color: white;
 }
