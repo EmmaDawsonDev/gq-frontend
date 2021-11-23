@@ -1,18 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,900;1,300;1,400;1,900&family=Righteous&display=swap');
 :root {
   --primary: #030514;
   --secondary-dk: #ef4444;
   --secondary-lt: #f97b7b;
   --tertiary: #cbd5e1;
+  --font-header: 'Righteous', cursive;
+  --font-body: 'Raleway', sans-serif;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,900;1,300;1,400;1,900&family=Righteous&display=swap');
 
 
 
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Raleway', sans-serif;
+  font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -28,9 +30,17 @@ code {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Righteous', cursive;
+  font-family: var(--font-header);
+}
+
+h1 {
+  font-size: clamp(2rem, 7vw, 5rem);
+}
+
+h2 {
+  font-size: clamp(1.3rem, 4vw, 3rem);
 }
 
 p {
-  font-family: 'Raleway', sans-serif;
+  font-family: var(--font-body);
 }
