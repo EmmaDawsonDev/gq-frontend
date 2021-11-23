@@ -1,0 +1,23 @@
+.card {
+  background-color: white;
+  border-radius: 20px;
+  padding: 1rem;
+  padding-top: 2rem;;
+  text-align: center;
+  margin-bottom: 1rem;
+  -webkit-box-shadow: 1px 5px 6px -2px rgba(0,0,0,0.75);
+-moz-box-shadow: 1px 5px 6px -2px rgba(0,0,0,0.75);
+box-shadow: 1px 5px 6px -2px rgba(0,0,0,0.75);
+}
+
+
+
+.card h4, .card img {
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 600px) {
+  .card {
+    width: 100%;
+  }
+}
