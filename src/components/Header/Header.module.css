@@ -24,4 +24,5 @@
 .logoText {
   font-family: var(--font-header);
   font-size: 1.5rem;
+  margin-bottom: 0;
 }
