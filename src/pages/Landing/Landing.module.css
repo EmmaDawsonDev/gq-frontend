@@ -1,0 +1,24 @@
+.headerImg {
+  min-height: 100vh;
+  background-image: url(../../assets/images/landing-header-mobile.jpg);
+  background-position: center center;
+  background-repeat: no-repeat; 
+  background-size: cover;
+  display: grid;
+  place-items: center;
+  
+  
+}
+
+.landingHeaderText {
+  color: white;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .headerImg {
+    background-position: top center;
+    background-image: url(../../assets/images/landing-header-desktop.jpg);
+    background-size: cover;
+  }
+}
