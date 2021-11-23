@@ -1,7 +1,14 @@
+
+
 .header {
   background-color: var(--primary);
   color: white;
   padding: 1rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
 }
 
 .logoContainer {
@@ -12,4 +19,9 @@
 
 .logo {
   height: 30px;
+}
+
+.logoText {
+  font-family: var(--font-header);
+  font-size: 1.5rem;
 }
