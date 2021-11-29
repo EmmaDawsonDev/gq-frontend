@@ -2,6 +2,7 @@ import React from 'react'
 
 import InfoSection from '../../components/Layout/InfoSection'
 import Card from '../../components/Card/Card'
+import Footer from '../../components/Footer/Footer'
 
 import styles from './Landing.module.css'
 import crownImg from '../../assets/images/crown.jpg'
@@ -51,6 +52,7 @@ const Landing = () => {
           />
         </div>
       </InfoSection>
+      <Footer />
     </main>
   )
 }
