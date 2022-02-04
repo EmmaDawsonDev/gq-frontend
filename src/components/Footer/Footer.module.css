@@ -4,3 +4,8 @@
   color: white;
   padding: 1rem;
 }
+
+.footerCopyText {
+  text-align: center;
+  margin-top: 3rem;
+}
