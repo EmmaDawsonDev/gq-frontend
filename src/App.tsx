@@ -1,12 +1,12 @@
-import React from 'react'
+
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Header from './components/Header/Header'
-import FAQs from './pages/FAQs/FAQs'
+// import FAQs from './pages/FAQs/FAQs'
 import Landing from './pages/Landing/Landing'
-import Login from './pages/Login/Login'
-import Play from './pages/Play/Play'
-import Profile from './pages/Profile/Profile'
-import Signup from './pages/Signup/Signup'
+// import Login from './pages/Login/Login'
+// import Play from './pages/Play/Play'
+// import Profile from './pages/Profile/Profile'
+// import Signup from './pages/Signup/Signup'
 import NotFound from './pages/NotFound/NotFound'
 
 import './App.css'
