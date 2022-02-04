@@ -1,0 +1,55 @@
+.headerImg {
+  min-height: 100vh;
+  background-image: url(../../assets/images/landing-header-mobile.jpg);
+  background-position: center center;
+  background-repeat: no-repeat; 
+  background-size: cover;
+  display: grid;
+  place-items: center;
+  
+  
+}
+
+.landingHeaderText {
+  color: white;
+  text-align: center;
+}
+
+
+
+h3, p {
+  text-align: center;
+  
+}
+
+
+
+.image {
+  max-width: 100%;
+}
+
+@media (min-width: 600px) {
+  .flexRow {
+    display: flex;
+    gap: 1rem;
+  }
+  p {
+    text-align: left;
+  }
+  .image {
+    max-width: 50%;
+  }
+}
+
+@media (min-width: 768px) {
+  .headerImg {
+    background-position: top center;
+    background-image: url(../../assets/images/landing-header-desktop.jpg);
+    background-size: cover;
+  }
+
+  .flexRowLg {
+    display: flex;
+    gap: 1rem;
+  }
+}

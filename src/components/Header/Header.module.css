@@ -1,0 +1,28 @@
+
+
+.header {
+  background-color: var(--primary);
+  color: white;
+  padding: 1rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+
+.logoContainer {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.logo {
+  height: 30px;
+}
+
+.logoText {
+  font-family: var(--font-header);
+  font-size: 1.5rem;
+  margin-bottom: 0;
+}

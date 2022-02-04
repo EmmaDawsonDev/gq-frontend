@@ -1,0 +1,11 @@
+.footer {
+  min-height: 10rem;
+  background-color: var(--primary);
+  color: white;
+  padding: 1rem;
+}
+
+.footerCopyText {
+  text-align: center;
+  margin-top: 3rem;
+}
