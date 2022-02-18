@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { IState } from '../../store/index'
 
 import styles from './Header.module.css'
+import { Link } from 'react-router-dom'
 import Logo from '../../assets/logos/gq-logo-white.svg'
 
 const Header = () => {
@@ -15,6 +16,14 @@ const Header = () => {
         <img src={Logo} alt="" className={styles.logo} />
         <p className={styles.logoText}>geoQuizzr</p>
       </section>
+      <div className={styles.buttonContainer}>
+        <Link to="/login" className={styles.linkOutline}>
+          Log in
+        </Link>
+        <Link to="/signup" className={styles.linkFill}>
+          Sign Up
+        </Link>
+      </div>
     </header>
   )
 }

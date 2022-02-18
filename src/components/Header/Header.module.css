@@ -9,6 +9,9 @@
   left: 0;
   right: 0;
   z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .logoContainer {
@@ -25,4 +28,27 @@
   font-family: var(--font-header);
   font-size: 1.5rem;
   margin-bottom: 0;
+}
+
+
+
+.linkFill, .linkOutline {
+  text-decoration: none;
+  padding: 0.5em 1em;
+  border: 1px solid white;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.linkFill {
+  background-color: white;
+  color: black;
+  
+}
+
+
+
+.linkOutline {
+  color: white;
+  margin-right: 0.5rem;
 }
