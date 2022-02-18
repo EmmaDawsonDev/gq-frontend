@@ -44,6 +44,12 @@
   border-radius: 5px;
 }
 
+.error {
+  color: var(--secondary-dk);
+  font-weight: bold;
+  font-size: 0.8rem;
+}
+
 @media (min-width: 400px) {
   .authFormContainer {
     border-radius: 20px;
