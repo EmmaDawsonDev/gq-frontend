@@ -1,11 +1,10 @@
 .signupMain {
-  margin-top: 3.9rem; 
-  height: 100vh;  
+  height: calc(100vh - 62px); 
 }
 
 @media (min-width: 400px) {
   .signupMain {
     padding: 3rem 0;
-    height: calc(100vh - 3.9rem);
+    
   }
 }
