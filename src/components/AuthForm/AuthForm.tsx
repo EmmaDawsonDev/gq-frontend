@@ -1,25 +1,24 @@
 import React, {ChangeEvent, useState} from 'react';
 import styles from "./AuthForm.module.css"
-import { useLocation } from "react-router-dom"
+import { useLocation, useHistory } from 'react-router-dom'
+import { UserDetails } from '../../types/user'
+// import { useAppDispatch } from '../../hooks/useAppDispatch'
+import { loginUser } from '../../store/user/userSlice.actions'
+import { useAppDispatch } from '../../hooks/useAppDispatch'
 
 interface AuthFormProps {
   title: string
 }
 
-interface UserDetails {
-  username?: string;
-  email: string;
-  password: string;
-  confirmPassword?: string
-}
-
 const AuthForm = (props: AuthFormProps) => {
-  const [userDetails, setUserDetails] = useState<UserDetails>({email: "", password: ""})
+  const [userDetails, setUserDetails] = useState<UserDetails>({ email: '', password: '' })
   const [remember, setRemember] = useState<boolean>(false)
   const [gdpr, setGdpr] = useState<boolean>(false)
   const [passwordMatch, setPasswordMatch] = useState<boolean>(true)
 
   const location = useLocation()
+  const history = useHistory()
+  const dispatch = useAppDispatch()
   const signup = location.pathname === '/signup'
 
   const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
@@ -35,7 +34,14 @@ const AuthForm = (props: AuthFormProps) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.log(userDetails)
+    console.log('In login form', userDetails)
+
+    if (!signup && userDetails.email && userDetails.password) {
+      const user = { email: userDetails.email, password: userDetails.password }
+
+      dispatch(loginUser(user, remember))
+      history.push('/play')
+    }
 
     // Check which route you are on
 
@@ -99,6 +105,6 @@ const AuthForm = (props: AuthFormProps) => {
       </button>
     </form>
   )
-};
+}
 
 export default AuthForm;
