@@ -23,6 +23,9 @@ export default function App() {
 
   const dispatch = useAppDispatch()
 
+  console.log('Loading state', isLoading)
+  
+
   useEffect(() => {
     const savedUserLS = localStorage.getItem('user')
     const savedUserSS = sessionStorage.getItem('user')

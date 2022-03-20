@@ -12,10 +12,7 @@ export const loginUser =
   (user: UserDetails, remember: boolean): AppThunk =>
   async dispatch => {
     dispatch(requestStateSlice.actions.showSpinner)
-    console.log('Before try')
-
     try {
-      console.log('inside try')
       const loggedInUser = await login(user)
       if (loggedInUser && remember) {
         localStorage.setItem('user', JSON.stringify(loggedInUser))
@@ -27,7 +24,6 @@ export const loginUser =
       dispatch(userSlice.actions.login(loggedInUser))
       dispatch(requestStateSlice.actions.hideSpinner)
     } catch (error) {
-      console.log('inside error')
       dispatch(requestStateSlice.actions.logErrorAndHideSpinner(error))
     }
   }
@@ -47,8 +43,6 @@ export const setUserFromStorage =
 
 export const logoutUser = (): AppThunk => async dispatch => {
   try {
-    console.log('here')
-
     localStorage.removeItem('user')
     sessionStorage.removeItem('user')
     dispatch(userSlice.actions.logout())

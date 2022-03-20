@@ -34,7 +34,7 @@ const Header = () => {
       )}
       {user && (
         <div className={styles.buttonContainer}>
-          <button type="button" onClick={handleLogout}>
+          <button className={styles.buttonOutline} type="button" onClick={handleLogout}>
             Log out
           </button>
         </div>
