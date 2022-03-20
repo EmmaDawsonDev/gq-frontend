@@ -2,9 +2,9 @@ import React, {ChangeEvent, useState} from 'react';
 import styles from "./AuthForm.module.css"
 import { useLocation, useHistory } from 'react-router-dom'
 import { UserDetails } from '../../types/user'
-// import { useAppDispatch } from '../../hooks/useAppDispatch'
-import { loginUser } from '../../store/user/userSlice.actions'
+import { loginUser, signupUser } from '../../store/user/userSlice.actions'
 import { useAppDispatch } from '../../hooks/useAppDispatch'
+import { useAppSelector } from '../../hooks/useAppSelector'
 
 interface AuthFormProps {
   title: string
@@ -14,7 +14,10 @@ const AuthForm = (props: AuthFormProps) => {
   const [userDetails, setUserDetails] = useState<UserDetails>({ email: '', password: '' })
   const [remember, setRemember] = useState<boolean>(false)
   const [gdpr, setGdpr] = useState<boolean>(false)
+  const [gdprError, setGdprError] = useState<boolean>(false)
   const [passwordMatch, setPasswordMatch] = useState<boolean>(true)
+
+  const error = useAppSelector(state => state.requestState.error)
 
   const location = useLocation()
   const history = useHistory()
@@ -34,6 +37,7 @@ const AuthForm = (props: AuthFormProps) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    setGdprError(false)
     console.log('In login form', userDetails)
 
     if (!signup && userDetails.email && userDetails.password) {
@@ -41,6 +45,22 @@ const AuthForm = (props: AuthFormProps) => {
 
       dispatch(loginUser(user, remember))
       history.push('/play')
+    }
+
+    if (signup && !gdpr) {
+      setGdprError(true)
+    }
+
+    if (signup && gdpr && passwordMatch && userDetails.email && userDetails.password && userDetails.username) {
+      const user: UserDetails = { username: userDetails!.username, email: userDetails.email, password: userDetails.password }
+      const response = dispatch(signupUser(user))
+      console.log(response)
+
+      // if (!error) {
+      //   history.replace('/login')
+      // } else {
+      //   console.log(error)
+      // }
     }
 
     // Check which route you are on
@@ -92,6 +112,7 @@ const AuthForm = (props: AuthFormProps) => {
         <div className={styles.checkboxContainer}>
           <input type="checkbox" id="gdprAgreement" name="gdprAgreement" required checked={gdpr} onChange={() => setGdpr(!gdpr)} />
           <label htmlFor="gdprAgreement">I agree to the privacy policy</label>
+          {gdprError && <p className={styles.error}>Please agree to the privacy agreement</p>}
         </div>
       ) : (
         <div className={styles.checkboxContainer}>

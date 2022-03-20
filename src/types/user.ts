@@ -7,7 +7,7 @@ export interface IUser {
 }
 
 export interface UserDetails {
-  username?: string
+  username?: string | undefined
   email: string
   password: string
   confirmPassword?: string
