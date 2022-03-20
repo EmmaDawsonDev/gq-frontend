@@ -11,7 +11,7 @@ export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unk
 export const loginUser =
   (user: UserDetails, remember: boolean): AppThunk =>
   async dispatch => {
-    dispatch(requestStateSlice.actions.showSpinner)
+    dispatch(requestStateSlice.actions.showSpinner())
     try {
       const loggedInUser = await login(user)
       if (loggedInUser && remember) {
@@ -22,7 +22,7 @@ export const loginUser =
       }
 
       dispatch(userSlice.actions.login(loggedInUser))
-      dispatch(requestStateSlice.actions.hideSpinner)
+      dispatch(requestStateSlice.actions.hideSpinner())
     } catch (error) {
       dispatch(requestStateSlice.actions.logErrorAndHideSpinner(error))
     }
@@ -31,11 +31,11 @@ export const loginUser =
 export const setUserFromStorage =
   (user: IUser): AppThunk =>
   async dispatch => {
-    dispatch(requestStateSlice.actions.showSpinner)
+    dispatch(requestStateSlice.actions.showSpinner())
 
     try {
       dispatch(userSlice.actions.login(user))
-      dispatch(requestStateSlice.actions.hideSpinner)
+      dispatch(requestStateSlice.actions.hideSpinner())
     } catch (error) {
       dispatch(requestStateSlice.actions.logErrorAndHideSpinner(error))
     }

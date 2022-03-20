@@ -39,7 +39,7 @@ export default function App() {
   }, [dispatch])
   return (
     <Router>
-      {isLoading && <LoadingSpinner />}
+      <LoadingSpinner display={isLoading} />
       <Header />
       <Switch>
         {/* <Route path="/FAQs">
