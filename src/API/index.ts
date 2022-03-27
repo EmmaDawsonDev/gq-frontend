@@ -21,7 +21,7 @@ export const login = async ({ email, password }: { email: string; password: stri
       console.log(response.data)
       return response.data
     } else {
-      return false
+      throw new Error()
     }
   } catch (error) {
     console.log(error)
@@ -57,4 +57,10 @@ export const signup = async ({ username, email, password }: UserDetails) => {
 
 //   "email": "emma1234@test.com",
 //   "password": "emma1234"
+// })
+
+// login({
+
+//   "email": "pelle22@test.com",
+//   "password": "testing123"
 // })

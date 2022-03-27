@@ -1,6 +1,6 @@
-import React, {ChangeEvent, useState} from 'react';
-import styles from "./AuthForm.module.css"
-import { useLocation, useHistory } from 'react-router-dom'
+import React, { ChangeEvent, useState, useRef, useEffect } from 'react'
+import styles from './AuthForm.module.css'
+import { useLocation, useHistory, Link } from 'react-router-dom'
 import { UserDetails } from '../../types/user'
 import { loginUser, signupUser } from '../../store/user/userSlice.actions'
 import { useAppDispatch } from '../../hooks/useAppDispatch'
@@ -23,6 +23,12 @@ const AuthForm = (props: AuthFormProps) => {
   const history = useHistory()
   const dispatch = useAppDispatch()
   const signup = location.pathname === '/signup'
+
+  useEffect(() => {
+    if (error) {
+      document.getElementById('errorContainer')?.focus()
+    }
+  }, [error])
 
   const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -53,28 +59,20 @@ const AuthForm = (props: AuthFormProps) => {
 
     if (signup && gdpr && passwordMatch && userDetails.email && userDetails.password && userDetails.username) {
       const user: UserDetails = { username: userDetails!.username, email: userDetails.email, password: userDetails.password }
-      const response = dispatch(signupUser(user))
-      console.log(response)
-
-      // if (!error) {
-      //   history.replace('/login')
-      // } else {
-      //   console.log(error)
-      // }
+      dispatch(signupUser(user))
+      history.push('/play')
     }
-
-    // Check which route you are on
-
-    // If login - dispatch login function + send remember variable
-    // so that it knows whether to save in session storage or local storage
-
-    // signup - check gdpr is true and dispatch signup function
   }
 
   const { title } = props
   return (
     <form className={styles.authFormContainer} onSubmit={handleSubmit}>
       <h1 className={styles.h1}>{title}</h1>
+      {error && (
+        <div className={styles.errorContainer} tabIndex={-1} id="errorContainer">
+          <p className={styles.formError}>{error}</p>
+        </div>
+      )}
       {signup && (
         <div className={styles.inputContainer}>
           <label htmlFor="username">
@@ -111,7 +109,9 @@ const AuthForm = (props: AuthFormProps) => {
       {signup ? (
         <div className={styles.checkboxContainer}>
           <input type="checkbox" id="gdprAgreement" name="gdprAgreement" required checked={gdpr} onChange={() => setGdpr(!gdpr)} />
-          <label htmlFor="gdprAgreement">I agree to the privacy policy</label>
+          <label htmlFor="gdprAgreement">
+            I agree to the <Link to="/privacy">privacy policy</Link>
+          </label>
           {gdprError && <p className={styles.error}>Please agree to the privacy agreement</p>}
         </div>
       ) : (
@@ -128,4 +128,4 @@ const AuthForm = (props: AuthFormProps) => {
   )
 }
 
-export default AuthForm;
+export default AuthForm

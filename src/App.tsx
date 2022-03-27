@@ -9,6 +9,7 @@ import LoadingSpinner from './components/LoadingSpinner/LoadingSpinner'
 import Login from './pages/Login/Login'
 import Play from './pages/Play/Play'
 // import Profile from './pages/Profile/Profile'
+import PrivacyPolicy from './pages/PrivacyPolicy/PrivacyPolicy'
 import Signup from './pages/Signup/Signup'
 // import NotFound from './pages/NotFound/NotFound'
 import { useAppSelector } from './hooks/useAppSelector'
@@ -22,9 +23,6 @@ export default function App() {
   const user = useAppSelector(state => state.user)
 
   const dispatch = useAppDispatch()
-
-  console.log('Loading state', isLoading)
-  
 
   useEffect(() => {
     const savedUserLS = localStorage.getItem('user')
@@ -59,6 +57,9 @@ export default function App() {
         </Route>
         <Route path="/login">
           <Login />
+        </Route>
+        <Route path="/privacy">
+          <PrivacyPolicy />
         </Route>
         <ProtectedRoute path="/play" component={Play} />
 
