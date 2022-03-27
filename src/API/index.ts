@@ -18,7 +18,6 @@ export const login = async ({ email, password }: { email: string; password: stri
 
     if (response.status === 200) {
       setDefaultHeaders(response.data.token)
-      console.log(response.data)
       return response.data
     } else {
       throw new Error()
@@ -37,7 +36,6 @@ export const signup = async ({ username, email, password }: UserDetails) => {
     })
 
     if (response.status === 201) {
-      console.log(response)
       return true
     } else {
       return false

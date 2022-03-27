@@ -1,6 +1,6 @@
 
 import { useEffect } from 'react'
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import ProtectedRoute from './ProtectedRoute'
 import Header from './components/Header/Header'
 // import FAQs from './pages/FAQs/FAQs'
@@ -20,7 +20,6 @@ import './App.css'
 
 export default function App() {
   const isLoading = useAppSelector(state => state.requestState.loading)
-  const user = useAppSelector(state => state.user)
 
   const dispatch = useAppDispatch()
 

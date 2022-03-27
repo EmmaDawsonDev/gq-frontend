@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState, useRef, useEffect } from 'react'
+import React, { ChangeEvent, useState, useEffect } from 'react'
 import styles from './AuthForm.module.css'
 import { useLocation, useHistory, Link } from 'react-router-dom'
 import { UserDetails } from '../../types/user'
@@ -44,7 +44,6 @@ const AuthForm = (props: AuthFormProps) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setGdprError(false)
-    console.log('In login form', userDetails)
 
     if (!signup && userDetails.email && userDetails.password) {
       const user = { email: userDetails.email, password: userDetails.password }

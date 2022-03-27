@@ -65,7 +65,6 @@ export const signupUser =
 
     try {
       const success = await signup(user)
-      console.log(success)
       if (success) {
         dispatch(loginUser({ email: user.email, password: user.password }, false))
       }
