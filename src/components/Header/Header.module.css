@@ -7,12 +7,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  
 }
 
 .logoContainer {
   display: flex;
   gap: 0.5rem;
   align-items: center;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .logo {
@@ -21,8 +24,11 @@
 
 .logoText {
   font-family: var(--font-header);
+  color: #fff;
   font-size: 1.5rem;
   margin-bottom: 0;
+  
+  
 }
 
 
@@ -48,6 +54,12 @@
   margin-right: 0.5rem;
 }
 
+.buttonContainer {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
 .buttonOutline {
   padding: 0.5em 1em;
   border: 1px solid white;
@@ -55,5 +67,11 @@
   font-size: 1rem;
   background-color: var(--primary);
   color: white;
+  cursor: pointer;
+}
+
+.profileImage {
+  height: 2rem;
+  width: 2rem;
   cursor: pointer;
 }
