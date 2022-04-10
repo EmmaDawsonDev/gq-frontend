@@ -5,6 +5,11 @@
   padding: 1rem;
 }
 
+.footerLink, .footerLink:active, .footerLink:visited {
+  color: white;
+  display: block;
+}
+
 .footerCopyText {
   text-align: center;
   margin-top: 3rem;

@@ -1,0 +1,78 @@
+.authFormContainer {
+  min-width: 350px;
+  max-width: 400px;
+  height: 100%;
+  background-color: var(--tertiary);
+  text-align: center;
+  padding: 2rem;
+  margin: 0 auto;
+}
+
+.h1 {
+  font-size: clamp(1.3rem, 4vw, 3rem);
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-bottom: 1rem;
+}
+
+
+.inputContainer input {
+  padding: 0.5rem;
+  background-color: white;
+  border: 1px solid rgb(212, 212, 212);
+  border-radius: 5px;
+}
+
+.checkboxContainer {
+  text-align: left;
+  margin-bottom: 1rem;
+}
+
+.checkboxContainer input {
+  margin-right: 0.5rem;
+}
+
+.formBtn {
+  padding: 0.5em 1em;
+  border: none;
+  background-color: var(--secondary-dk);
+  color: white;
+  font-size: 1rem;
+  border-radius: 5px;
+}
+
+.error, .formError {
+  color: var(--secondary-dk);
+  font-weight: bold;
+  
+}
+
+.error {
+  font-size: 0.8rem;
+  
+}
+
+.formError {
+  margin-bottom: 0;
+  font-size: 1rem;
+}
+
+.errorContainer {
+  border: 2px solid var(--secondary-dk);
+  border-radius: 5px;
+  background-color: white;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 400px) {
+  .authFormContainer {
+    border-radius: 20px;
+    margin: auto;
+    height: auto;
+  }
+}

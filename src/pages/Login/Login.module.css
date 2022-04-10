@@ -1,0 +1,10 @@
+.loginMain {
+  height: calc(100vh - 62px);  
+}
+
+@media (min-width: 400px) {
+  .loginMain {
+    padding: 3rem 0;
+    
+  }
+}
