@@ -75,3 +75,16 @@ p {
 .white {
   background-color: white;
 }
+
+.h1small {
+  font-size: clamp(2rem, 5vw, 4rem);
+}
+
+.h2small {
+  font-size: clamp(1.3rem, 2vw, 2.5rem);
+}
+
+.h3small {
+  font-size: clamp(1.3rem, 1.5vw, 2rem);
+}
+

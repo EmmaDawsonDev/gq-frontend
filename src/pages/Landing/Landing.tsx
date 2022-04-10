@@ -20,7 +20,7 @@ const Landing = () => {
         </div>
       </section>
       <InfoSection bg="white">
-        <h3>What is geoQuizzr?</h3>
+        <h3 className={styles.landingh3}>What is geoQuizzr?</h3>
         <div className={styles.flexRow}>
           <div>
             <p>The world is full of many magical things to discover and explore. Find these hidden gems with geoQuizzr.</p>
@@ -33,7 +33,7 @@ const Landing = () => {
         </div>
       </InfoSection>
       <InfoSection bg="secondary-lt">
-        <h3>How to play</h3>
+        <h3 className={styles.landingh3}>How to play</h3>
         <div className={styles.flexRowLg}>
           <Card
             title="1. Create an account"

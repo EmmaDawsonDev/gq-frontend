@@ -11,6 +11,7 @@ import Play from './pages/Play/Play'
 // import Profile from './pages/Profile/Profile'
 import PrivacyPolicy from './pages/PrivacyPolicy/PrivacyPolicy'
 import Signup from './pages/Signup/Signup'
+import TermsAndConditions from './pages/TermsAndConditions/TermsAndConditions'
 // import NotFound from './pages/NotFound/NotFound'
 import { useAppSelector } from './hooks/useAppSelector'
 import { useAppDispatch } from './hooks/useAppDispatch'
@@ -59,6 +60,9 @@ export default function App() {
         </Route>
         <Route path="/privacy">
           <PrivacyPolicy />
+        </Route>
+        <Route path="/toc">
+          <TermsAndConditions />
         </Route>
         <ProtectedRoute path="/play" component={Play} />
 

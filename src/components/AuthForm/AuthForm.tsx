@@ -109,7 +109,7 @@ const AuthForm = (props: AuthFormProps) => {
         <div className={styles.checkboxContainer}>
           <input type="checkbox" id="gdprAgreement" name="gdprAgreement" required checked={gdpr} onChange={() => setGdpr(!gdpr)} />
           <label htmlFor="gdprAgreement">
-            I agree to the <Link to="/privacy">privacy policy</Link>
+            I agree to the <Link to="/toc">Terms and Conditions</Link>
           </label>
           {gdprError && <p className={styles.error}>Please agree to the privacy agreement</p>}
         </div>
