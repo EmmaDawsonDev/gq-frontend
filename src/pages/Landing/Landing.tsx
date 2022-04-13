@@ -23,8 +23,10 @@ const Landing = () => {
         <h3 className={styles.landingh3}>What is geoQuizzr?</h3>
         <div className={styles.flexRow}>
           <div>
-            <p>The world is full of many magical things to discover and explore. Find these hidden gems with geoQuizzr.</p>
-            <p>
+            <p className={styles.landingP}>
+              The world is full of many magical things to discover and explore. Find these hidden gems with geoQuizzr.
+            </p>
+            <p className={styles.landingP}>
               At landmarks all around Stockholm you will find questions related to the surroundings. Answer the questions correctly to gain
               points and become a geoQuizzr champion.
             </p>

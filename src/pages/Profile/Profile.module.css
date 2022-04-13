@@ -1,0 +1,41 @@
+.profileContainer {
+  min-width: 350px;
+  width: 100%;
+  max-width: 800px;
+  height: 100%;  
+  text-align: center;
+  padding: 2rem;
+  margin: 0 auto;
+  background-color: var(--tertiary);
+}
+
+.h1 {
+  font-size: clamp(1.3rem, 4vw, 3rem);
+}
+
+.points {
+  font-size: 2rem;
+  font-weight: bold;
+  display: block;
+}
+
+.flexRow {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+
+
+@media (min-width: 400px) {
+  .profileContainer {
+    border-radius: 20px;
+    margin: 2rem auto;
+    height: auto;
+    width: 90%;
+    
+  }
+}

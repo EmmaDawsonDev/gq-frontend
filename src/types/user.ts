@@ -2,7 +2,7 @@ export interface IUser {
   _id: string
   username: string
   email: string
-  points: number
+  score: number
   token: string
 }
 

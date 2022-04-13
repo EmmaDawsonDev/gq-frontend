@@ -17,7 +17,7 @@
 
 
 
-.landingh3, p {
+.landingh3, .landingP {
   text-align: center;
   
 }
@@ -33,7 +33,7 @@
     display: flex;
     gap: 1rem;
   }
-  p {
+  .landingP {
     text-align: left;
   }
   .image {

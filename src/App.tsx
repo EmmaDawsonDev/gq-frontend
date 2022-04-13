@@ -8,7 +8,7 @@ import Landing from './pages/Landing/Landing'
 import LoadingSpinner from './components/LoadingSpinner/LoadingSpinner'
 import Login from './pages/Login/Login'
 import Play from './pages/Play/Play'
-// import Profile from './pages/Profile/Profile'
+import Profile from './pages/Profile/Profile'
 import PrivacyPolicy from './pages/PrivacyPolicy/PrivacyPolicy'
 import Signup from './pages/Signup/Signup'
 import TermsAndConditions from './pages/TermsAndConditions/TermsAndConditions'
@@ -65,6 +65,7 @@ export default function App() {
           <TermsAndConditions />
         </Route>
         <ProtectedRoute path="/play" component={Play} />
+        <ProtectedRoute path="/profile" component={Profile} />
 
         <Route>
           <NotFound />
