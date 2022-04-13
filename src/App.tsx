@@ -12,7 +12,7 @@ import Play from './pages/Play/Play'
 import PrivacyPolicy from './pages/PrivacyPolicy/PrivacyPolicy'
 import Signup from './pages/Signup/Signup'
 import TermsAndConditions from './pages/TermsAndConditions/TermsAndConditions'
-// import NotFound from './pages/NotFound/NotFound'
+import NotFound from './pages/NotFound/NotFound'
 import { useAppSelector } from './hooks/useAppSelector'
 import { useAppDispatch } from './hooks/useAppDispatch'
 import { setUserFromStorage } from './store/user/userSlice.actions'
@@ -66,9 +66,9 @@ export default function App() {
         </Route>
         <ProtectedRoute path="/play" component={Play} />
 
-        {/* <Route>
-            <NotFound />
-          </Route> */}
+        <Route>
+          <NotFound />
+        </Route>
       </Switch>
     </Router>
   )
