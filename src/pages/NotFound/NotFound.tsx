@@ -1,10 +1,14 @@
-import React from 'react'
+import InfoSection from '../../components/Layout/InfoSection'
+import { Link } from 'react-router-dom'
 
 const NotFound = () => {
   return (
-    <div>
-      <h1>404 Not found</h1>
-    </div>
+    <main>
+      <InfoSection bg="white">
+        <h1>404 Page Not Found</h1>
+        <Link to="/">Back to homepage</Link>
+      </InfoSection>
+    </main>
   )
 }
 
