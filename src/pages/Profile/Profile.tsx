@@ -1,10 +1,32 @@
+import { useState } from 'react'
 import { useAppSelector } from '../../hooks/useAppSelector'
+import { useAppDispatch } from '../../hooks/useAppDispatch'
+import { updateUser } from '../../store/user/userSlice.actions'
 import climb from '../../assets/icons/climb.png'
+import edit from '../../assets/icons/edit-pencil.png'
 import styles from './Profile.module.css'
 
 const Profile = () => {
   const user = useAppSelector(state => state.user.user)
+
+  const [editUsername, setEditUsername] = useState<boolean>(false)
+  const [updatedUsername, setUpdatedUsername] = useState<string>(user?.username || '')
+  const [editEmail, setEditEmail] = useState<boolean>(false)
+  const [updatedEmail, setUpdatedEmail] = useState<string>(user?.email || '')
+
   const numberQuestionsAnswered = user!.score / 5
+
+  const dispatch = useAppDispatch()
+
+  const handleSaveUpdatedUser = (dataType: 'username' | 'email') => {
+    if (dataType === 'username') {
+      dispatch(updateUser({ username: updatedUsername }))
+    }
+    if (dataType === 'email') {
+      dispatch(updateUser({ email: updatedEmail }))
+    }
+  }
+
   return (
     <main>
       <section className={styles.profileContainer}>
@@ -23,14 +45,59 @@ const Profile = () => {
       </section>
       <section className={styles.profileContainer}>
         <h2>User information</h2>
-        <div className={styles.flexRow}>
-          <p className={styles.bold}>Username:</p>
-          <p>{user?.username}</p>
-        </div>
-        <div className={styles.flexRow}>
-          <p className={styles.bold}>Email:</p>
-          <p>{user?.email}</p>
-        </div>
+        {!editUsername && (
+          <div className={styles.flexRow}>
+            <p className={styles.bold}>Username:</p>
+            <p>{user?.username}</p>
+            <button aria-label="edit username" className={styles.iconBtn} onClick={() => setEditUsername(true)}>
+              <img src={edit} alt="edit icon"></img>
+            </button>
+          </div>
+        )}
+        {editUsername && (
+          <div className={styles.flexRow}>
+            <label htmlFor="updateUsername" className={styles.boldLabel}>
+              Username:
+            </label>
+            <input
+              type="text"
+              id="updateUsername"
+              name="updateUsername"
+              value={updatedUsername}
+              onChange={e => setUpdatedUsername(e.target.value)}
+            />
+            <button className={styles.saveBtn} onClick={() => handleSaveUpdatedUser('username')}>
+              Save
+            </button>
+            <button className={styles.cancelBtn} onClick={() => setEditUsername(false)}>
+              Cancel
+            </button>
+          </div>
+        )}
+
+        {!editEmail && (
+          <div className={styles.flexRow}>
+            <p className={styles.bold}>Email:</p>
+            <p>{user?.email}</p>
+            <button aria-label="edit email" className={styles.iconBtn} onClick={() => setEditEmail(true)}>
+              <img src={edit} alt="edit icon"></img>
+            </button>
+          </div>
+        )}
+        {editEmail && (
+          <div className={styles.flexRow}>
+            <label htmlFor="updateUsername" className={styles.boldLabel}>
+              Email:
+            </label>
+            <input type="text" id="updateEmail" name="updateEmail" value={updatedEmail} onChange={e => setUpdatedEmail(e.target.value)} />
+            <button className={styles.saveBtn} onClick={() => handleSaveUpdatedUser('email')}>
+              Save
+            </button>
+            <button className={styles.cancelBtn} onClick={() => setEditEmail(false)}>
+              Cancel
+            </button>
+          </div>
+        )}
       </section>
     </main>
   )

@@ -22,10 +22,48 @@
 .flexRow {
   display: flex;
   gap: 0.5rem;
+  align-items: baseline;
+  margin-bottom: 1rem;
+  min-height: 40px;
 }
 
 .bold {
   font-weight: bold;
+}
+
+.boldLabel {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.iconBtn {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.iconBtn img {
+  width: 1.2rem;
+}
+
+.saveBtn {
+  padding: 0.4em 1em;
+  border: none;
+  background-color: var(--secondary-dk);
+  color: white;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cancelBtn {
+  padding: 0.5em 1em;
+  border: none;
+  background-color: transparent;
+  color: var(--secondary-dk);
+  text-decoration: underline;
+  font-size: 1rem;
+  cursor: pointer;
 }
 
 

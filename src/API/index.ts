@@ -45,6 +45,19 @@ export const signup = async ({ username, email, password }: UserDetails) => {
   }
 }
 
+export const update = async (updateObj: { username?: string; email?: string; password?: string }) => {
+  try {
+    const response = await API.patch('/myProfile', updateObj)
+    if (response.status === 200) {
+      return true
+    } else {
+      throw new Error()
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 // login({
 
 //   "email": "pelle@test.com",
