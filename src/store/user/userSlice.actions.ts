@@ -1,6 +1,6 @@
 import { userSlice } from './userSlice'
 import { requestStateSlice } from '../requestState/requestStateSlice'
-import { login, signup, update } from '../../API'
+import { login, signup, update, setDefaultHeaders } from '../../API'
 import { UserDetails, IUser } from '../../types/user'
 import { Action } from 'redux'
 import { ThunkAction } from 'redux-thunk'
@@ -40,6 +40,7 @@ export const setUserFromStorage =
 
     try {
       dispatch(userSlice.actions.login(user))
+      setDefaultHeaders(user.token)
       dispatch(requestStateSlice.actions.hideSpinner())
     } catch (error) {
       dispatch(requestStateSlice.actions.logErrorAndHideSpinner('Something went wrong. Please try again.'))

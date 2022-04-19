@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useAppSelector } from '../../hooks/useAppSelector'
 import { useAppDispatch } from '../../hooks/useAppDispatch'
 import { updateUser } from '../../store/user/userSlice.actions'
@@ -8,6 +8,7 @@ import styles from './Profile.module.css'
 
 const Profile = () => {
   const user = useAppSelector(state => state.user.user)
+  const error = useAppSelector(state => state.requestState.error)
 
   const [editUsername, setEditUsername] = useState<boolean>(false)
   const [updatedUsername, setUpdatedUsername] = useState<string>(user?.username || '')
@@ -27,6 +28,12 @@ const Profile = () => {
     }
   }
 
+  useEffect(() => {
+    if (error) {
+      document.getElementById('errorContainer')?.focus()
+    }
+  }, [error])
+
   return (
     <main>
       <section className={styles.profileContainer}>
@@ -45,6 +52,11 @@ const Profile = () => {
       </section>
       <section className={styles.profileContainer}>
         <h2>User information</h2>
+        {error && (
+          <div className={styles.errorContainer} tabIndex={-1} id="errorContainer">
+            <p className={styles.formError}>{error}</p>
+          </div>
+        )}
         {!editUsername && (
           <div className={styles.flexRow}>
             <p className={styles.bold}>Username:</p>
@@ -60,7 +72,8 @@ const Profile = () => {
               Username:
             </label>
             <input
-              type="text"
+              type="email"
+              required
               id="updateUsername"
               name="updateUsername"
               value={updatedUsername}
@@ -89,7 +102,14 @@ const Profile = () => {
             <label htmlFor="updateUsername" className={styles.boldLabel}>
               Email:
             </label>
-            <input type="text" id="updateEmail" name="updateEmail" value={updatedEmail} onChange={e => setUpdatedEmail(e.target.value)} />
+            <input
+              type="text"
+              required
+              id="updateEmail"
+              name="updateEmail"
+              value={updatedEmail}
+              onChange={e => setUpdatedEmail(e.target.value)}
+            />
             <button className={styles.saveBtn} onClick={() => handleSaveUpdatedUser('email')}>
               Save
             </button>
