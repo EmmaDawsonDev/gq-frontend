@@ -20,12 +20,7 @@
 }
 
 
-.inputContainer input {
-  padding: 0.5rem;
-  background-color: white;
-  border: 1px solid rgb(212, 212, 212);
-  border-radius: 5px;
-}
+
 
 .checkboxContainer {
   text-align: left;
@@ -43,6 +38,7 @@
   color: white;
   font-size: 1rem;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 .error, .formError {

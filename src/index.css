@@ -88,3 +88,10 @@ p {
   font-size: clamp(1.3rem, 1.5vw, 2rem);
 }
 
+input {
+  padding: 0.5rem;
+  background-color: white;
+  border: 1px solid rgb(212, 212, 212);
+  border-radius: 5px;
+}
+
