@@ -22,10 +22,84 @@
 .flexRow {
   display: flex;
   gap: 0.5rem;
+  align-items: baseline; 
+  min-height: 40px;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
 }
 
-.bold {
+.flexRow .text {
+  flex-grow: 1;
+  text-align: left;
+}
+
+
+
+.bold, .boldLabel {
   font-weight: bold;
+  min-width: 9ch;
+  text-align: left;
+}
+
+.boldLabel {
+  
+  font-size: 1.2rem;
+  
+}
+
+.iconBtn {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  
+}
+
+.iconBtn img {
+  width: 1.2rem;
+}
+
+.saveBtn {
+  padding: 0.4em 1em;
+  border: none;
+  background-color: var(--secondary-dk);
+  color: white;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cancelBtn {
+  padding: 0.5em 1em;
+  border: none;
+  background-color: transparent;
+  color: var(--secondary-dk);
+  text-decoration: underline;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.error, .formError {
+  color: var(--secondary-dk);
+  font-weight: bold;
+  
+}
+
+.error {
+  font-size: 0.8rem;
+  
+}
+
+.formError {
+  margin-bottom: 0;
+  font-size: 1rem;
+}
+
+.errorContainer {
+  border: 2px solid var(--secondary-dk);
+  border-radius: 5px;
+  background-color: white;
+  padding: 1rem;
+  margin-bottom: 1rem;
 }
 
 

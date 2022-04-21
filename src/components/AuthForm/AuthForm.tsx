@@ -45,8 +45,8 @@ const AuthForm = (props: AuthFormProps) => {
     e.preventDefault()
     setGdprError(false)
 
-    if (!signup && userDetails.email && userDetails.password) {
-      const user = { email: userDetails.email, password: userDetails.password }
+    if (!signup && userDetails.email.trim() && userDetails.password) {
+      const user = { email: userDetails.email.trim(), password: userDetails.password }
 
       dispatch(loginUser(user, remember))
       history.push('/play')
@@ -56,8 +56,8 @@ const AuthForm = (props: AuthFormProps) => {
       setGdprError(true)
     }
 
-    if (signup && gdpr && passwordMatch && userDetails.email && userDetails.password && userDetails.username) {
-      const user: UserDetails = { username: userDetails!.username, email: userDetails.email, password: userDetails.password }
+    if (signup && gdpr && passwordMatch && userDetails.email.trim() && userDetails.password && userDetails.username?.trim()) {
+      const user: UserDetails = { username: userDetails!.username.trim(), email: userDetails.email.trim(), password: userDetails.password }
       dispatch(signupUser(user))
       history.push('/play')
     }
