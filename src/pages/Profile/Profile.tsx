@@ -150,7 +150,7 @@ const Profile = () => {
           <form onSubmit={e => handleSaveUpdatedUser(e, 'password')}>
             <div className={styles.flexRow}>
               <label htmlFor="updatePassword" className={styles.boldLabel}>
-                Password (at least 8 characters):
+                New password (at least 8 characters):
               </label>
               <input
                 type="Password"
@@ -164,7 +164,7 @@ const Profile = () => {
             </div>
             <div className={styles.flexRow}>
               <label htmlFor="confirmUpdatePassword" className={styles.boldLabel}>
-                Confirm password:
+                Confirm new password:
               </label>
               <input
                 type="Password"
