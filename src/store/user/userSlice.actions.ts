@@ -79,21 +79,43 @@ export const signupUser =
   }
 
 export const updateUser =
-  (updateObj: { username?: string; email?: string; password?: string }): AppThunk =>
+  (updateObj: { username?: string; email?: string }): AppThunk =>
   async dispatch => {
     dispatch(requestStateSlice.actions.showSpinner())
     dispatch(requestStateSlice.actions.clearError())
     try {
       const success = await update(updateObj)
       if (success) {
-        const user = localStorage.getItem('user')
-        if (user) {
-          const updatedUser = { ...JSON.parse(user), ...updateObj }
+        const userLS = localStorage.getItem('user')
+        const userSS = sessionStorage.getItem('user')
+        if (userLS) {
+          const updatedUser = { ...JSON.parse(userLS), ...updateObj }
           localStorage.setItem('user', JSON.stringify(updatedUser))
+        }
+        if (userSS) {
+          const updatedUser = { ...JSON.parse(userSS), ...updateObj }
+          sessionStorage.setItem('user', JSON.stringify(updatedUser))
         }
         dispatch(userSlice.actions.updateUserInfo(updateObj))
         window.location.reload()
       }
+      if (!success) {
+        dispatch(requestStateSlice.actions.setError('Something went wrong. Could not update at this time.'))
+      }
+      dispatch(requestStateSlice.actions.hideSpinner())
+    } catch (error) {
+      dispatch(requestStateSlice.actions.logErrorAndHideSpinner('Something went wrong. Could not update at this time.'))
+    }
+  }
+
+export const updateUserPassword =
+  (updateObj: { password: string }): AppThunk =>
+  async dispatch => {
+    dispatch(requestStateSlice.actions.showSpinner())
+    dispatch(requestStateSlice.actions.clearError())
+    try {
+      const success = await update(updateObj)
+
       if (!success) {
         dispatch(requestStateSlice.actions.setError('Something went wrong. Could not update at this time.'))
       }

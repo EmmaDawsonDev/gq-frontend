@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useAppSelector } from '../../hooks/useAppSelector'
 import { useAppDispatch } from '../../hooks/useAppDispatch'
-import { updateUser } from '../../store/user/userSlice.actions'
+import { updateUser, updateUserPassword } from '../../store/user/userSlice.actions'
 import climb from '../../assets/icons/climb.png'
 import edit from '../../assets/icons/edit-pencil.png'
 import styles from './Profile.module.css'
@@ -14,17 +14,32 @@ const Profile = () => {
   const [updatedUsername, setUpdatedUsername] = useState<string>(user?.username || '')
   const [editEmail, setEditEmail] = useState<boolean>(false)
   const [updatedEmail, setUpdatedEmail] = useState<string>(user?.email || '')
+  const [editPassword, setEditPassword] = useState<boolean>(false)
+  const [updatedPassword, setUpdatedPassword] = useState<string>('')
+  const [confirmUpdatedPassword, setConfirmUpdatedPassword] = useState<string>('')
+  const [passwordMatch, setPasswordMatch] = useState<boolean>(true)
 
   const numberQuestionsAnswered = user!.score / 5
 
   const dispatch = useAppDispatch()
 
-  const handleSaveUpdatedUser = (dataType: 'username' | 'email') => {
-    if (dataType === 'username') {
-      dispatch(updateUser({ username: updatedUsername }))
+  useEffect(() => {
+    updatedPassword === confirmUpdatedPassword ? setPasswordMatch(true) : setPasswordMatch(false)
+  }, [updatedPassword, confirmUpdatedPassword])
+
+  const handleSaveUpdatedUser = (e: React.FormEvent<HTMLFormElement>, dataType: 'username' | 'email' | 'password') => {
+    e.preventDefault()
+    if (dataType === 'username' && updatedUsername.trim()) {
+      console.log(updatedUsername)
+
+      dispatch(updateUser({ username: updatedUsername.trim() }))
     }
-    if (dataType === 'email') {
-      dispatch(updateUser({ email: updatedEmail }))
+    if (dataType === 'email' && updatedEmail.trim()) {
+      dispatch(updateUser({ email: updatedEmail.trim() }))
+    }
+    if (dataType === 'password' && updatedPassword.trim() === confirmUpdatedPassword.trim()) {
+      dispatch(updateUserPassword({ password: updatedPassword.trim() }))
+      setEditPassword(false)
     }
   }
 
@@ -60,63 +75,117 @@ const Profile = () => {
         {!editUsername && (
           <div className={styles.flexRow}>
             <p className={styles.bold}>Username:</p>
-            <p>{user?.username}</p>
-            <button aria-label="edit username" className={styles.iconBtn} onClick={() => setEditUsername(true)}>
+            <p className={styles.text}>{user?.username}</p>
+            <button aria-label="edit username" className={styles.iconBtn} onClick={() => setEditUsername(true)} type="button">
               <img src={edit} alt="edit icon"></img>
             </button>
           </div>
         )}
         {editUsername && (
-          <div className={styles.flexRow}>
+          <form className={styles.flexRow} onSubmit={e => handleSaveUpdatedUser(e, 'username')}>
             <label htmlFor="updateUsername" className={styles.boldLabel}>
               Username:
             </label>
             <input
-              type="email"
+              type="text"
               required
               id="updateUsername"
               name="updateUsername"
               value={updatedUsername}
               onChange={e => setUpdatedUsername(e.target.value)}
             />
-            <button className={styles.saveBtn} onClick={() => handleSaveUpdatedUser('username')}>
-              Save
-            </button>
-            <button className={styles.cancelBtn} onClick={() => setEditUsername(false)}>
-              Cancel
-            </button>
-          </div>
+            <div>
+              <button className={styles.saveBtn} type="submit">
+                Save
+              </button>
+              <button className={styles.cancelBtn} type="button" onClick={() => setEditUsername(false)}>
+                Cancel
+              </button>
+            </div>
+          </form>
         )}
 
         {!editEmail && (
           <div className={styles.flexRow}>
             <p className={styles.bold}>Email:</p>
-            <p>{user?.email}</p>
-            <button aria-label="edit email" className={styles.iconBtn} onClick={() => setEditEmail(true)}>
+            <p className={styles.text}>{user?.email}</p>
+            <button aria-label="edit email" className={styles.iconBtn} type="button" onClick={() => setEditEmail(true)}>
               <img src={edit} alt="edit icon"></img>
             </button>
           </div>
         )}
         {editEmail && (
-          <div className={styles.flexRow}>
-            <label htmlFor="updateUsername" className={styles.boldLabel}>
+          <form className={styles.flexRow} onSubmit={e => handleSaveUpdatedUser(e, 'email')}>
+            <label htmlFor="updateEmail" className={styles.boldLabel}>
               Email:
             </label>
             <input
-              type="text"
+              type="email"
               required
               id="updateEmail"
               name="updateEmail"
               value={updatedEmail}
               onChange={e => setUpdatedEmail(e.target.value)}
             />
-            <button className={styles.saveBtn} onClick={() => handleSaveUpdatedUser('email')}>
-              Save
-            </button>
-            <button className={styles.cancelBtn} onClick={() => setEditEmail(false)}>
-              Cancel
+            <div>
+              <button className={styles.saveBtn} type="submit">
+                Save
+              </button>
+              <button className={styles.cancelBtn} type="button" onClick={() => setEditEmail(false)}>
+                Cancel
+              </button>
+            </div>
+          </form>
+        )}
+        {!editPassword && (
+          <div className={styles.flexRow}>
+            <p className={styles.bold}>Password:</p>
+            <p className={styles.text}>********</p>
+            <button aria-label="edit Password" className={styles.iconBtn} type="button" onClick={() => setEditPassword(true)}>
+              <img src={edit} alt="edit icon"></img>
             </button>
           </div>
+        )}
+        {editPassword && (
+          <form onSubmit={e => handleSaveUpdatedUser(e, 'password')}>
+            <div className={styles.flexRow}>
+              <label htmlFor="updatePassword" className={styles.boldLabel}>
+                Password (at least 8 characters):
+              </label>
+              <input
+                type="Password"
+                required
+                id="updatePassword"
+                name="updatePassword"
+                minLength={8}
+                value={updatedPassword}
+                onChange={e => setUpdatedPassword(e.target.value)}
+              />
+            </div>
+            <div className={styles.flexRow}>
+              <label htmlFor="confirmUpdatePassword" className={styles.boldLabel}>
+                Confirm password:
+              </label>
+              <input
+                type="Password"
+                required
+                id="confirmUpdatePassword"
+                name="confirmUpdatePassword"
+                minLength={8}
+                value={confirmUpdatedPassword}
+                onChange={e => setConfirmUpdatedPassword(e.target.value)}
+              />
+              {!passwordMatch && <p className={styles.error}>The passwords do not match</p>}
+            </div>
+            <div className={styles.flexRow}>
+              <button className={styles.saveBtn} type="submit">
+                Save
+              </button>
+              <button className={styles.cancelBtn} type="button" onClick={() => setEditPassword(false)}>
+                Cancel
+              </button>
+            </div>
+          </form>
         )}
       </section>
     </main>
