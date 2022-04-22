@@ -1,6 +1,6 @@
 import { userSlice } from './userSlice'
 import { requestStateSlice } from '../requestState/requestStateSlice'
-import { login, signup, update, setDefaultHeaders } from '../../API'
+import { login, signup, update, setDefaultHeaders, deleteUser as removeUser } from '../../API'
 import { UserDetails, IUser } from '../../types/user'
 import { Action } from 'redux'
 import { ThunkAction } from 'redux-thunk'
@@ -124,3 +124,20 @@ export const updateUserPassword =
       dispatch(requestStateSlice.actions.logErrorAndHideSpinner('Something went wrong. Could not update at this time.'))
     }
   }
+
+export const deleteUser = (): AppThunk => async dispatch => {
+  dispatch(requestStateSlice.actions.showSpinner())
+  dispatch(requestStateSlice.actions.clearError())
+  try {
+    const success = await removeUser()
+    if (success) {
+      dispatch(logoutUser())
+    }
+    if (!success) {
+      dispatch(requestStateSlice.actions.setError('Something went wrong. Could not delete your account at this time.'))
+    }
+    dispatch(requestStateSlice.actions.hideSpinner())
+  } catch (error) {
+    dispatch(requestStateSlice.actions.logErrorAndHideSpinner('Something went wrong. Could not delete your account at this time.'))
+  }
+}

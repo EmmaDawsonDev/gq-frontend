@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react'
 import { useAppSelector } from '../../hooks/useAppSelector'
 import { useAppDispatch } from '../../hooks/useAppDispatch'
-import { updateUser, updateUserPassword } from '../../store/user/userSlice.actions'
+import { updateUser, updateUserPassword, deleteUser } from '../../store/user/userSlice.actions'
 import climb from '../../assets/icons/climb.png'
 import edit from '../../assets/icons/edit-pencil.png'
+import Modal from '../../components/Modal/Modal'
 import styles from './Profile.module.css'
 
 const Profile = () => {
@@ -18,6 +19,8 @@ const Profile = () => {
   const [updatedPassword, setUpdatedPassword] = useState<string>('')
   const [confirmUpdatedPassword, setConfirmUpdatedPassword] = useState<string>('')
   const [passwordMatch, setPasswordMatch] = useState<boolean>(true)
+  const [showModal, setShowModal] = useState<boolean>(false)
+  const [focusedNode, setFocusedNode] = useState<any>(null)
 
   const numberQuestionsAnswered = user!.score / 5
 
@@ -30,8 +33,6 @@ const Profile = () => {
   const handleSaveUpdatedUser = (e: React.FormEvent<HTMLFormElement>, dataType: 'username' | 'email' | 'password') => {
     e.preventDefault()
     if (dataType === 'username' && updatedUsername.trim()) {
-      console.log(updatedUsername)
-
       dispatch(updateUser({ username: updatedUsername.trim() }))
     }
     if (dataType === 'email' && updatedEmail.trim()) {
@@ -42,6 +43,21 @@ const Profile = () => {
       setEditPassword(false)
     }
   }
+
+  const handleDelete = () => {
+    dispatch(deleteUser())
+  }
+
+  const openModal = (e: React.MouseEvent<HTMLButtonElement>) => {
+    setFocusedNode(e.target)
+    setShowModal(true)
+  }
+
+  useEffect(() => {
+    if (!showModal && focusedNode) {
+      focusedNode.focus()
+    }
+  }, [focusedNode, showModal])
 
   useEffect(() => {
     if (error) {
@@ -187,7 +203,27 @@ const Profile = () => {
             </div>
           </form>
         )}
+        <button onClick={openModal} className={styles.deleteBtn}>
+          Delete account
+        </button>
       </section>
+      <Modal
+        display={showModal}
+        onClose={() => {
+          setShowModal(false)
+        }}
+        title="Are you sure you want to delete your account?"
+      >
+        <>
+          <p>This is irreversible. All your data will be removed permanently from the game.</p>
+          <button onClick={handleDelete} className={styles.saveBtn}>
+            Yes, I'm sure
+          </button>
+          <button onClick={() => setShowModal(false)} className={styles.cancelBtn}>
+            Cancel
+          </button>
+        </>
+      </Modal>
     </main>
   )
 }

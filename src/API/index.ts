@@ -58,6 +58,19 @@ export const update = async (updateObj: { username?: string; email?: string; pas
   }
 }
 
+export const deleteUser = async () => {
+  try {
+    const response = await API.delete('/myProfile')
+    if (response.status === 200) {
+      return true
+    } else {
+      throw new Error()
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 // login({
 
 //   "email": "pelle@test.com",
