@@ -68,14 +68,22 @@
   cursor: pointer;
 }
 
-.cancelBtn {
-  padding: 0.5em 1em;
+.cancelBtn, .deleteBtn {
+  
   border: none;
   background-color: transparent;
   color: var(--secondary-dk);
   text-decoration: underline;
   font-size: 1rem;
   cursor: pointer;
+}
+
+.cancelBtn {
+  margin-left: 0.5rem;
+}
+
+.deleteBtn {
+  display: block;
 }
 
 .error, .formError {
