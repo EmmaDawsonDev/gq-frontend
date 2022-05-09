@@ -71,11 +71,11 @@ export const deleteUser = async () => {
   }
 }
 
-export const getQuestions = async () => {
+export const getQuestions = async (lat: number, lng: number) => {
   try {
-    const response = await API.get('/questions')
+    const response = await API.get(`/questions?lat=${lat}&lon=${lng}`)
     if (response.status === 200) {
-      return response.data
+      return response.data.responseArray
     } else {
       throw new Error()
     }

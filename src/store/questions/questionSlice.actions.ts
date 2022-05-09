@@ -8,19 +8,21 @@ import { RootState } from '..'
 
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, Action<string>>
 
-export const fetchQuestions = (): AppThunk => async dispatch => {
-  dispatch(requestStateSlice.actions.showSpinner())
-  dispatch(requestStateSlice.actions.clearError())
-  try {
-    const questions: IQuestion[] | undefined = await getQuestions()
+export const fetchQuestions =
+  (lat: number, lng: number): AppThunk =>
+  async dispatch => {
+    dispatch(requestStateSlice.actions.showSpinner())
+    dispatch(requestStateSlice.actions.clearError())
+    try {
+      const questions: IQuestion[] | undefined = await getQuestions(lat, lng)
 
-    if (questions) {
-      dispatch(questionSlice.actions.fetchQuestions(questions))
-    } else {
-      dispatch(requestStateSlice.actions.setError('Something went wrong, unable to fetch questions at this time.'))
+      if (questions) {
+        dispatch(questionSlice.actions.fetchQuestions(questions))
+      } else {
+        dispatch(requestStateSlice.actions.setError('Something went wrong, unable to fetch questions at this time.'))
+      }
+      dispatch(requestStateSlice.actions.hideSpinner())
+    } catch (error) {
+      dispatch(requestStateSlice.actions.logErrorAndHideSpinner('Something went wrong. Please try again.'))
     }
-    dispatch(requestStateSlice.actions.hideSpinner())
-  } catch (error) {
-    dispatch(requestStateSlice.actions.logErrorAndHideSpinner('Something went wrong. Please try again.'))
   }
-}
