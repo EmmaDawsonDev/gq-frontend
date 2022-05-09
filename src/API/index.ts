@@ -71,6 +71,18 @@ export const deleteUser = async () => {
   }
 }
 
+export const getQuestions = async () => {
+  try {
+    const response = await API.get('/questions')
+    if (response.status === 200) {
+      return response.data
+    } else {
+      throw new Error()
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
 // login({
 
 //   "email": "pelle@test.com",
