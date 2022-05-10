@@ -28,3 +28,15 @@
   display: flex;
   gap: 0.25rem;
 }
+
+.errorContainer {
+  height: 18px
+}
+
+.error {
+  color: var(--secondary-dk);
+  font-weight: bold;
+  font-size: 0.8rem;
+  margin: 0.25rem;
+}
+

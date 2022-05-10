@@ -10,9 +10,18 @@ import styles from './Play.module.css'
 
 const Play = () => {
   const [playerPosition, setPlayerPosition] = useState({ lat: 59.3288676, lng: 18.0617572 })
+  const [showError, setShowError] = useState<boolean>(false)
 
   const questions = useAppSelector(state => state.questions.questions)
+  const error = useAppSelector(state => state.requestState.error)
   const answerRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    if (error) {
+      setShowError(true)
+      setTimeout(() => setShowError(false), 3000)
+    }
+  }, [error])
 
   // useEffect(() => {
   //   if ('geolocation' in navigator) {
@@ -96,6 +105,13 @@ const Play = () => {
                       <button type="submit" className={styles.answerBtn}>
                         Go!
                       </button>
+                    </div>
+                    <div className={styles.errorContainer}>
+                      {showError && (
+                        <p style={{ margin: 0 }} className={styles.error}>
+                          {error}
+                        </p>
+                      )}
                     </div>
                   </form>
                 )}
