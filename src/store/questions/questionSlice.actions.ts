@@ -1,6 +1,7 @@
 import { questionSlice } from './questionSlice'
 import { requestStateSlice } from '../requestState/requestStateSlice'
-import { getQuestions } from '../../API'
+import { userSlice } from '../user/userSlice'
+import { getQuestions, submitAnswer } from '../../API'
 import { IQuestion } from '../../types/question'
 import { Action } from 'redux'
 import { ThunkAction } from 'redux-thunk'
@@ -20,6 +21,26 @@ export const fetchQuestions =
         dispatch(questionSlice.actions.fetchQuestions(questions))
       } else {
         dispatch(requestStateSlice.actions.setError('Something went wrong, unable to fetch questions at this time.'))
+      }
+      dispatch(requestStateSlice.actions.hideSpinner())
+    } catch (error) {
+      dispatch(requestStateSlice.actions.logErrorAndHideSpinner('Something went wrong. Please try again.'))
+    }
+  }
+
+export const answerQuestion =
+  (questionId: string, attemptedAnswer: string): AppThunk =>
+  async dispatch => {
+    dispatch(requestStateSlice.actions.showSpinner())
+    dispatch(requestStateSlice.actions.clearError())
+    try {
+      const correct = await submitAnswer(questionId, attemptedAnswer)
+      if (correct) {
+        console.log('Correct!')
+        dispatch(questionSlice.actions.answerQuestion(questionId))
+        dispatch(userSlice.actions.updateUserScore())
+      } else {
+        dispatch(requestStateSlice.actions.setError('That answer is incorrect. Please try again.'))
       }
       dispatch(requestStateSlice.actions.hideSpinner())
     } catch (error) {

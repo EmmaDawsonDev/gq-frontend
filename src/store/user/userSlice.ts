@@ -25,10 +25,15 @@ export const userSlice = createSlice({
     updateUserInfo: (state, action) => {
       return { ...state.user, ...action.payload }
     },
+    updateUserScore: state => {
+      if (state.user) {
+        state.user.score += 5
+      }
+    },
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { login, logout, reset, updateUserInfo } = userSlice.actions
+export const { login, logout, reset, updateUserInfo, updateUserScore } = userSlice.actions
 
 export default userSlice.reducer

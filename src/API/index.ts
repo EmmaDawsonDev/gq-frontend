@@ -83,6 +83,20 @@ export const getQuestions = async (lat: number, lng: number) => {
     console.log(error)
   }
 }
+
+export const submitAnswer = async (questionId: string, attemptedAnswer: string) => {
+  try {
+    const response = await API.patch(`/questions/${questionId}`, { answer: attemptedAnswer })
+    if (response.status === 200) {
+      console.log('Question answered correctly in API')
+      return true
+    } else {
+      throw new Error()
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
 // login({
 
 //   "email": "pelle@test.com",

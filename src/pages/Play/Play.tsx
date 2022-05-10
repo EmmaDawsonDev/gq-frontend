@@ -3,7 +3,7 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import * as L from 'leaflet'
 import { useAppDispatch } from '../../hooks/useAppDispatch'
 import { useAppSelector } from '../../hooks/useAppSelector'
-import { fetchQuestions } from '../../store/questions/questionSlice.actions'
+import { fetchQuestions, answerQuestion } from '../../store/questions/questionSlice.actions'
 import mapPinRed from '../../assets/icons/map-pin-red.png'
 import mapPinGreen from '../../assets/icons/map-pin-green.png'
 import styles from './Play.module.css'
@@ -53,7 +53,7 @@ const Play = () => {
 
   const handleAnswer = (e: React.FormEvent<HTMLFormElement>, questionId: string) => {
     e.preventDefault()
-    console.log(answerRef!.current!.value, questionId)
+    dispatch(answerQuestion(questionId, answerRef!.current!.value))
   }
 
   return (
@@ -90,6 +90,7 @@ const Play = () => {
                         id={`${question._id}-answer-field`}
                         name={`${question._id}-answer-field`}
                         ref={answerRef}
+                        className={styles.answerInput}
                         // onChange={e => setAnswer(e.target.value)}
                       />
                       <button type="submit" className={styles.answerBtn}>
