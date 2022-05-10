@@ -40,3 +40,16 @@
   margin: 0.25rem;
 }
 
+.scoreContainer {
+  position: absolute;
+  right: 1rem;
+  top: 0.5rem;
+  background-color: white;
+  border: 1px solid var(--primary);
+  font-size: 1rem;
+  font-family: var(--font-body);
+  padding: 0.25rem 0.5rem;
+  z-index: 400;
+  border-radius: 5px;
+}
+

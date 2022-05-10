@@ -1,5 +1,5 @@
 import styles from './Header.module.css'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 import Logo from '../../assets/logos/gq-logo-white.svg'
 import accountWhite from '../../assets/icons/account-white.png'
 import { useAppSelector } from '../../hooks/useAppSelector'
@@ -11,6 +11,9 @@ const Header = () => {
 
   const dispatch = useAppDispatch()
   const history = useHistory()
+  const location = useLocation()
+
+  console.log(location)
 
   const handleLogout = () => {
     dispatch(logoutUser())
@@ -35,9 +38,16 @@ const Header = () => {
       )}
       {user && (
         <div className={styles.buttonContainer}>
-          <Link to="/profile" className={styles.profileImageLink}>
-            <img src={accountWhite} alt="profile icon" className={styles.profileImage} />
-          </Link>
+          {location.pathname === '/play' && (
+            <Link to="/profile" className={styles.profileImageLink}>
+              <img src={accountWhite} alt="profile icon" className={styles.profileImage} />
+            </Link>
+          )}
+          {location.pathname === '/profile' && (
+            <Link to="/play" className={styles.navLink}>
+              Play
+            </Link>
+          )}
           <button className={styles.buttonOutline} type="button" onClick={handleLogout}>
             Log out
           </button>

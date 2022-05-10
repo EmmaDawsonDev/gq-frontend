@@ -62,7 +62,7 @@
 
 .buttonOutline {
   padding: 0.5em 1em;
-  border: 1px solid white;
+  border: 2px solid white;
   border-radius: 5px;
   font-size: 1rem;
   background-color: var(--primary);
@@ -80,4 +80,11 @@
 .profileImageLink {
   display: grid;
   align-items: center;
+}
+
+.navLink, .navLink:visited {
+  color: white;
+  font-family: var(--font-body);
+  margin-right: 1rem;
+  text-decoration: none;
 }

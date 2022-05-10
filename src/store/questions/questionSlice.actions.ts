@@ -39,6 +39,18 @@ export const answerQuestion =
         console.log('Correct!')
         dispatch(questionSlice.actions.answerQuestion(questionId))
         dispatch(userSlice.actions.updateUserScore())
+        const savedUserLS = localStorage.getItem('user')
+        const savedUserSS = sessionStorage.getItem('user')
+        if (savedUserLS) {
+          const user = JSON.parse(savedUserLS)
+          const updatedUser = { ...user, score: user.score + 5 }
+          localStorage.setItem('user', JSON.stringify(updatedUser))
+        }
+        if (savedUserSS) {
+          const user = JSON.parse(savedUserSS)
+          const updatedUser = { ...user, score: user.score + 5 }
+          localStorage.setItem('user', JSON.stringify(updatedUser))
+        }
       } else {
         dispatch(requestStateSlice.actions.setError('That answer is incorrect. Please try again.'))
       }

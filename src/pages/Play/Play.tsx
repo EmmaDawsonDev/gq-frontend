@@ -12,6 +12,7 @@ const Play = () => {
   const [playerPosition, setPlayerPosition] = useState({ lat: 59.3288676, lng: 18.0617572 })
   const [showError, setShowError] = useState<boolean>(false)
 
+  const score = useAppSelector(state => state.user.user?.score)
   const questions = useAppSelector(state => state.questions.questions)
   const error = useAppSelector(state => state.requestState.error)
   const answerRef = useRef<HTMLInputElement>(null)
@@ -68,6 +69,7 @@ const Play = () => {
   return (
     <main>
       <MapContainer center={playerPosition} zoom={15} className={styles.leafletContainer}>
+        <div className={styles.scoreContainer}>Score: {score}</div>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
