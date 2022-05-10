@@ -110,7 +110,7 @@ const Play = () => {
                       {showError && (
                         <p style={{ margin: 0 }} className={styles.error}>
                           {error}
-                        </p>
+                        </p> // Inline styles used to overwrite those inbuilt from leaflet
                       )}
                     </div>
                   </form>
