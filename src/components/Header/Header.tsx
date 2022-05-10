@@ -13,8 +13,6 @@ const Header = () => {
   const history = useHistory()
   const location = useLocation()
 
-  console.log(location)
-
   const handleLogout = () => {
     dispatch(logoutUser())
     history.replace('/')

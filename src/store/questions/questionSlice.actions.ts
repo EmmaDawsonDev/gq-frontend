@@ -36,7 +36,6 @@ export const answerQuestion =
     try {
       const correct = await submitAnswer(questionId, attemptedAnswer)
       if (correct) {
-        console.log('Correct!')
         dispatch(questionSlice.actions.answerQuestion(questionId))
         dispatch(userSlice.actions.updateUserScore())
         const savedUserLS = localStorage.getItem('user')
