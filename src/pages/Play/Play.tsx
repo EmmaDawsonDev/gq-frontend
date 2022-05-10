@@ -51,9 +51,9 @@ const Play = () => {
     popupAnchor: [3, -40],
   })
 
-  const handleAnswer = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleAnswer = (e: React.FormEvent<HTMLFormElement>, questionId: string) => {
     e.preventDefault()
-    console.log(answerRef!.current!.value)
+    console.log(answerRef!.current!.value, questionId)
   }
 
   return (
@@ -80,7 +80,7 @@ const Play = () => {
                 {question.properties.answered ? (
                   <p>You've answered this question correctly!</p>
                 ) : (
-                  <form onSubmit={e => handleAnswer(e)}>
+                  <form onSubmit={e => handleAnswer(e, question._id)}>
                     <label htmlFor={`${question._id}-answer-field`} className={styles.label}>
                       Answer:
                     </label>

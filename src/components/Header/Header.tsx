@@ -35,7 +35,7 @@ const Header = () => {
       )}
       {user && (
         <div className={styles.buttonContainer}>
-          <Link to="/profile">
+          <Link to="/profile" className={styles.profileImageLink}>
             <img src={accountWhite} alt="profile icon" className={styles.profileImage} />
           </Link>
           <button className={styles.buttonOutline} type="button" onClick={handleLogout}>
