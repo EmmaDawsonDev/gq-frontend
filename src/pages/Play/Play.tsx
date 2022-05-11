@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, Popup, useMap, Circle } from 'react-leaflet'
 import * as L from 'leaflet'
 import { useAppDispatch } from '../../hooks/useAppDispatch'
 import { useAppSelector } from '../../hooks/useAppSelector'
@@ -7,6 +7,19 @@ import { fetchQuestions, answerQuestion } from '../../store/questions/questionSl
 import mapPinRed from '../../assets/icons/map-pin-red.png'
 import mapPinGreen from '../../assets/icons/map-pin-green.png'
 import styles from './Play.module.css'
+import { LatLngExpression } from 'leaflet'
+
+interface ChangeViewProps {
+  center: LatLngExpression
+  zoom: number
+}
+
+// This is needed to update the center of the map, as MapContainer props are immutable
+function ChangeView({ center, zoom }: ChangeViewProps) {
+  const map = useMap()
+  map.setView(center, zoom)
+  return null
+}
 
 const Play = () => {
   const [playerPosition, setPlayerPosition] = useState({ lat: 59.3288676, lng: 18.0617572 })
@@ -24,21 +37,21 @@ const Play = () => {
     }
   }, [error])
 
-  // useEffect(() => {
-  //   if ('geolocation' in navigator) {
-  //     const success = (position: any) => setPlayerPosition({ lat: position.coords.latitude, lng: position.coords.longitude })
+  useEffect(() => {
+    if ('geolocation' in navigator) {
+      const success = (position: any) => setPlayerPosition({ lat: position.coords.latitude, lng: position.coords.longitude })
 
-  //     const error = (error: any) => console.warn(`ERROR(${error.code}): ${error.message}`)
+      const error = (error: any) => console.warn(`ERROR(${error.code}): ${error.message}`)
 
-  //     const options = {
-  //       enableHighAccuracy: true,
-  //       timeout: 5000,
-  //       maximumAge: 0,
-  //     }
+      const options = {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0,
+      }
 
-  //     navigator.geolocation.getCurrentPosition(success, error, options)
-  //   }
-  // }, [])
+      navigator.geolocation.getCurrentPosition(success, error, options)
+    }
+  }, [])
 
   const dispatch = useAppDispatch()
 
@@ -70,10 +83,12 @@ const Play = () => {
     <main>
       <MapContainer center={playerPosition} zoom={15} className={styles.leafletContainer}>
         <div className={styles.scoreContainer}>Score: {score}</div>
+        <ChangeView center={playerPosition} zoom={15} />
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+        <Circle center={playerPosition} radius={20} />
         {questions.length === 0 && (
           <Marker position={playerPosition}>
             <Popup>You are here. There are no questions within a 1km radius.</Popup>
