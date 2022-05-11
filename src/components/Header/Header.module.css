@@ -51,18 +51,18 @@
 
 .linkOutline {
   color: white;
-  margin-right: 0.5rem;
+  
 }
 
 .buttonContainer {
   display: flex;
-  gap: 1rem;
+  gap: 0.5rem;
   align-items: center;
 }
 
 .buttonOutline {
   padding: 0.5em 1em;
-  border: 1px solid white;
+  border: 2px solid white;
   border-radius: 5px;
   font-size: 1rem;
   background-color: var(--primary);
@@ -73,5 +73,18 @@
 .profileImage {
   height: 2rem;
   width: 2rem;
+  margin-right: 0.5rem;
   cursor: pointer;
+}
+
+.profileImageLink {
+  display: grid;
+  align-items: center;
+}
+
+.navLink, .navLink:visited {
+  color: white;
+  font-family: var(--font-body);
+  margin-right: 1rem;
+  text-decoration: none;
 }

@@ -3,3 +3,53 @@
   width: 100%;
   
 }
+
+.label {
+  font-family: var(--font-body);
+  margin-right: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.answerInput {
+  flex-grow: 1;
+}
+
+.answerBtn {
+  padding: 0.5em;
+  border: none;
+  background-color: var(--secondary-dk);
+  color: white;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.flexRow {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.errorContainer {
+  height: 18px
+}
+
+.error {
+  color: var(--secondary-dk);
+  font-weight: bold;
+  font-size: 0.8rem;
+  margin: 0.25rem;
+}
+
+.scoreContainer {
+  position: absolute;
+  right: 1rem;
+  top: 0.5rem;
+  background-color: white;
+  border: 1px solid var(--primary);
+  font-size: 1rem;
+  font-family: var(--font-body);
+  padding: 0.25rem 0.5rem;
+  z-index: 400;
+  border-radius: 5px;
+}
+
