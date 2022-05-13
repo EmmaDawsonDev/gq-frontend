@@ -12,13 +12,12 @@ import { haversineDistance } from '../../utils/utilityFunctions'
 
 interface ChangeViewProps {
   center: LatLngExpression
-  zoom: number
 }
 
 // This is needed to update the center of the map, as MapContainer props are immutable
-function ChangeView({ center, zoom }: ChangeViewProps) {
+function ChangeView({ center }: ChangeViewProps) {
   const map = useMap()
-  map.setView(center, zoom)
+  map.panTo(center)
   return null
 }
 
@@ -103,7 +102,7 @@ const Play = () => {
     <main>
       <MapContainer center={playerPosition} zoom={15} className={styles.leafletContainer}>
         <div className={styles.scoreContainer}>Score: {score}</div>
-        <ChangeView center={playerPosition} zoom={15} />
+        <ChangeView center={playerPosition} />
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
