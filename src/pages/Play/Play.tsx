@@ -148,7 +148,7 @@ const Play = () => {
                     </div>
                     <div className={styles.errorContainer}>
                       {showError && (
-                        <p style={{ margin: 0 }} className={styles.error}>
+                        <p style={{ margin: 0 }} className={styles.error} aria-live="polite">
                           {error}
                         </p> // Inline styles used to overwrite those inbuilt from leaflet
                       )}

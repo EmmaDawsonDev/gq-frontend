@@ -99,3 +99,8 @@ input {
 button {
   font-family: var(--font-body);
 }
+
+input:focus-visible, button:focus-visible, a:focus-visible {
+  outline: 2px solid var(--secondary-dk);
+  outline-offset: 2px;
+}

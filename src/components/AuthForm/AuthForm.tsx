@@ -123,7 +123,7 @@ const AuthForm = (props: AuthFormProps) => {
       ) : (
         <div className={styles.checkboxContainer}>
           <input type="checkbox" id="rememberMe" name="rememberMe" checked={remember} onChange={() => setRemember(!remember)} />
-          <label htmlFor="rememberMe">Remember me</label>
+          <label htmlFor="rememberMe">Keep me logged in</label>
         </div>
       )}
 
