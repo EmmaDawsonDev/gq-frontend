@@ -5,24 +5,32 @@
   bottom: 0;
   right: 0;
   display: grid;
-  place-items: center;
+  place-items: center;  
   z-index: 1000;
+  
 }
 
+.spinnerInnerContainer {
+  height: 80px;
+  width: 80px;
+  
+}
 
 .ldsRoller div {
   animation: ldsRoller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
   transform-origin: 40px 40px;
+  
 }
 .ldsRoller div:after {
   content: " ";
   display: block;
   position: absolute;
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
-  background: var(--secondary-dk);
+  background: var(--secondary-lt);
   margin: -4px 0 0 -4px;
+  
 }
 .ldsRoller div:nth-child(1) {
   animation-delay: -0.036s;
