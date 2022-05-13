@@ -3,6 +3,7 @@ import styles from './AuthForm.module.css'
 import { useLocation, useHistory, Link } from 'react-router-dom'
 import { UserDetails } from '../../types/user'
 import { loginUser, signupUser } from '../../store/user/userSlice.actions'
+import { clearError } from '../../store/requestState/requestStateSlice'
 import { useAppDispatch } from '../../hooks/useAppDispatch'
 import { useAppSelector } from '../../hooks/useAppSelector'
 
@@ -23,6 +24,12 @@ const AuthForm = (props: AuthFormProps) => {
   const history = useHistory()
   const dispatch = useAppDispatch()
   const signup = location.pathname === '/signup'
+
+  // Clear any errors when page first loads
+  useEffect(() => {
+    dispatch(clearError())
+    // eslint-disable-next-line
+  }, [])
 
   useEffect(() => {
     if (error) {

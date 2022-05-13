@@ -4,6 +4,7 @@ import * as L from 'leaflet'
 import { useAppDispatch } from '../../hooks/useAppDispatch'
 import { useAppSelector } from '../../hooks/useAppSelector'
 import { fetchQuestions, answerQuestion } from '../../store/questions/questionSlice.actions'
+import { clearError } from '../../store/requestState/requestStateSlice'
 import mapPinRed from '../../assets/icons/map-pin-red.png'
 import mapPinGreen from '../../assets/icons/map-pin-green.png'
 import styles from './Play.module.css'
@@ -40,6 +41,12 @@ const Play = () => {
 
   const dispatch = useAppDispatch()
 
+  // Clear any errors when page first loads
+  useEffect(() => {
+    dispatch(clearError())
+    // eslint-disable-next-line
+  }, [])
+
   useEffect(() => {
     let watchID: number
     if ('geolocation' in navigator) {
@@ -69,8 +76,6 @@ const Play = () => {
 
   // Fetch questions as soon as player is 500m away from the last time they loaded
   useEffect(() => {
-   
-
     if (haversineDistance(prevPosition, playerPosition) >= 0.5) {
       dispatch(fetchQuestions(playerPosition.lat, playerPosition.lng))
       setPrevPosition(playerPosition)

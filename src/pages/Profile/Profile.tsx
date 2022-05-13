@@ -6,6 +6,7 @@ import climb from '../../assets/icons/climb.png'
 import edit from '../../assets/icons/edit-pencil.png'
 import Modal from '../../components/Modal/Modal'
 import styles from './Profile.module.css'
+import { clearError } from '../../store/requestState/requestStateSlice'
 
 const Profile = () => {
   const user = useAppSelector(state => state.user.user)
@@ -25,6 +26,12 @@ const Profile = () => {
   const numberQuestionsAnswered = user!.score / 5
 
   const dispatch = useAppDispatch()
+
+  // Clear any errors when page first loads
+  useEffect(() => {
+    dispatch(clearError())
+    // eslint-disable-next-line
+  }, [])
 
   useEffect(() => {
     updatedPassword === confirmUpdatedPassword ? setPasswordMatch(true) : setPasswordMatch(false)
