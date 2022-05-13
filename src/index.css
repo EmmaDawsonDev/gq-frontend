@@ -94,8 +94,15 @@ input {
   background-color: white;
   border: 1px solid rgb(212, 212, 212);
   border-radius: 5px;
+  font-family: var(--font-body);
+  font-size: 1rem;
 }
 
 button {
   font-family: var(--font-body);
+}
+
+input:focus-visible, button:focus-visible, a:focus-visible {
+  outline: 2px solid var(--secondary-dk);
+  outline-offset: 2px;
 }

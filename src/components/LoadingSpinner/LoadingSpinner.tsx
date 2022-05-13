@@ -15,15 +15,17 @@ const LoadingSpinner = (props: LoadingSpinnerProps) => {
 
   return (
     <div className={styles.spinnerContainer}>
-      <div className={styles.ldsRoller}>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+      <div className={styles.spinnerInnerContainer}>
+        <div className={styles.ldsRoller}>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
       </div>
     </div>
   )
