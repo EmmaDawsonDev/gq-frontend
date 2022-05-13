@@ -46,7 +46,7 @@ const Header = () => {
               Play
             </Link>
           )}
-          <button className={styles.buttonOutline} type="button" onClick={handleLogout}>
+          <button className={styles.buttonOutline} type="button" role="link" onClick={handleLogout}>
             Log out
           </button>
         </div>

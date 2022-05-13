@@ -36,7 +36,7 @@
 .linkFill, .linkOutline {
   text-decoration: none;
   padding: 0.5em 1em;
-  border: 1px solid white;
+  border: 2px solid white;
   border-radius: 5px;
   font-size: 1rem;
 }
