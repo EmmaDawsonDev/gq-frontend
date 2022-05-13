@@ -26,6 +26,7 @@ const Play = () => {
   const [playerPosition, setPlayerPosition] = useState({ lat: 59.3288676, lng: 18.0617572 })
   const [prevPosition, setPrevPosition] = useState({ lat: 59.3288676, lng: 18.0617572 })
   const [showError, setShowError] = useState<boolean>(false)
+  const [tabVisible, setTabVisible] = useState<'show' | 'hide'>('show')
 
   const score = useAppSelector(state => state.user.user?.score)
   const questions = useAppSelector(state => state.questions.questions)
@@ -68,6 +69,27 @@ const Play = () => {
     }
   }, [])
 
+  // Keep track of if the tab/window is open so that the request to fetch new questions only triggers when it's open
+  useEffect(() => {
+    const hide = () => setTabVisible('hide')
+
+    const show = () => setTabVisible('show')
+
+    const handleVisibilityChange = () => {
+      document.hidden ? hide() : show()
+    }
+
+    document.addEventListener('visibilitychange', handleVisibilityChange, false)
+    window.addEventListener('focus', show, false)
+    window.addEventListener('blur', hide, false)
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
+      window.removeEventListener('focus', show)
+      window.removeEventListener('blur', hide)
+    }
+  }, [setTabVisible])
+
   // Always fetch questions when app loads, just on the chance that the player is less than 500m from the default coords
   useEffect(() => {
     dispatch(fetchQuestions(playerPosition.lat, playerPosition.lng))
@@ -76,11 +98,11 @@ const Play = () => {
 
   // Fetch questions as soon as player is 500m away from the last time they loaded
   useEffect(() => {
-    if (haversineDistance(prevPosition, playerPosition) >= 0.5) {
+    if (haversineDistance(prevPosition, playerPosition) >= 0.5 && tabVisible === 'show') {
       dispatch(fetchQuestions(playerPosition.lat, playerPosition.lng))
       setPrevPosition(playerPosition)
     }
-  }, [dispatch, playerPosition, prevPosition])
+  }, [dispatch, playerPosition, prevPosition, tabVisible])
 
   // Icon color
   const unansweredQIcon = new L.Icon({
@@ -116,7 +138,9 @@ const Play = () => {
         <Circle center={playerPosition} radius={20} />
         {questions.length === 0 && (
           <Marker position={playerPosition}>
-            <Popup>You are here. There are no questions within a 1km radius.</Popup>
+            <Popup>
+              <p>You are here. There are no questions within a 1km radius.</p>
+            </Popup>
           </Marker>
         )}
         {questions.length > 0 &&
