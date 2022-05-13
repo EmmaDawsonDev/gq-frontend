@@ -69,10 +69,9 @@ const Play = () => {
 
   // Fetch questions as soon as player is 500m away from the last time they loaded
   useEffect(() => {
-    console.log('Running')
+   
 
     if (haversineDistance(prevPosition, playerPosition) >= 0.5) {
-      alert('fetching')
       dispatch(fetchQuestions(playerPosition.lat, playerPosition.lng))
       setPrevPosition(playerPosition)
     }
