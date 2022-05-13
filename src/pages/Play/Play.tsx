@@ -99,7 +99,9 @@ const Play = () => {
 
   const handleAnswer = (e: React.FormEvent<HTMLFormElement>, questionId: string) => {
     e.preventDefault()
-    dispatch(answerQuestion(questionId, answerRef!.current!.value))
+    if (answerRef!.current!.value.trim() !== '') {
+      dispatch(answerQuestion(questionId, answerRef!.current!.value.trim()))
+    }
   }
 
   return (
