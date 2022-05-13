@@ -1,6 +1,12 @@
+import { useEffect } from 'react'
 import InfoSection from '../../components/Layout/InfoSection'
 
 const PrivacyPolicy = () => {
+  // scroll page to top on first load
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   return (
     <main>
       <InfoSection bg="white">
